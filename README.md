@@ -2,7 +2,7 @@
 
 Simple soap service development
 
-Setting Classpath :
+Setting classpath :
 
 USER VARIABLE
  
