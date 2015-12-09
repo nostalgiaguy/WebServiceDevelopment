@@ -12,5 +12,7 @@
 
 	<modules>
 		<module>SoapServiceTomcat</module>
+		
+		<module>SoapServiceUsingCXF</module>
 	</modules>
 </project>

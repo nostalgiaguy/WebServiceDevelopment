@@ -8,19 +8,15 @@
 		<artifactId>WevServiceFramework</artifactId>
 		<version>1.0</version>
 	</parent>
-	<groupId>com.nostalgiaguy.soapservice</groupId>
-	<artifactId>SoapServiceTomcat</artifactId>
+	<groupId>com.nostalgiaguy.soapservice.cxf</groupId>
+	<artifactId>SoapServiceUsingCXF</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SoapServiceTomcat</name>
+	<name>SoapServiceUsingCXF</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<cxf.version>2.7.7</cxf.version>
 	</properties>
-	<dependencies>
-
-	</dependencies>
-	<packaging>war</packaging>
-
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
@@ -41,5 +37,33 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>SoapServiceUsingCXF</finalName> 
 	</build>
+	<dependencies>
+		<dependency>
+			<!-- Apache JAX-WS CXF Dependency for WAR and JAX-WS Client -->
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<!-- Apache JAX-WS CXF Dependency for JAX-WS Client -->
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>3.0.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>3.0.4.RELEASE</version>
+		</dependency>
+
+
+	</dependencies>
+	<packaging>war</packaging>
 </project>
