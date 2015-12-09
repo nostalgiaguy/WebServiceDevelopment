@@ -13,8 +13,7 @@ public final class Client {
     }
 
     public static void main(String args[]) throws Exception {
-         ClassPathXmlApplicationContext context 
-            = new ClassPathXmlApplicationContext(new String[] {"com.nostalgiaguy.soapservice.cxf.cxfclient/client-beans.xml"});
+         ClassPathXmlApplicationContext context  = new ClassPathXmlApplicationContext("com/nostalgiaguy/soapservice/cxf/cxfclient/client-beans.xml");
 
          CalculatorPull client = (CalculatorPull) context.getBean("orderClient");
          int p1=8;
