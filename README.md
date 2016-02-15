@@ -33,11 +33,8 @@ ComSpec -------          %SystemRoot%\system32\cmd.exe
 PATH ----                C:\Windows\System32;%JAVA_HOME%\bin;
 
                          %MAVEN_HOME%\bin;
-                         
                          %CATALINA_HOME%\bin;
-                         
                          %ANT_HOME%\bin;
-                         
                          %CXF_HOME%\bin;
 
 USERNAME ---            SYSTEM
