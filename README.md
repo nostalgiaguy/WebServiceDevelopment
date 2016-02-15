@@ -17,7 +17,9 @@ ANT_HOME   ----           C:\Program Files\Apache Software Foundation\apache-ant
 CATALINA_HOME             C:\Program Files\Apache Software Foundation\apache-tomcat-8.0.29
 
 CXF_HOME                  C:\Program Files\Apache Software Foundation\apache-cxf-3.1.4
+
 JAVA_HOME  ----           C:\Program Files\Java\jdk1.7.0_60
+
 MAVEN_HOME ----           G:\Maven\apache-maven-3.0.4
  
 CLASSPATH  ----          C:\Program Files\Java\jdk1.7.0_60\jre\lib;
