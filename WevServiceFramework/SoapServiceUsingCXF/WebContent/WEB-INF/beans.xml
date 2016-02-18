@@ -1,20 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:cxf="http://cxf.apache.org/core" xmlns:wsa="http://cxf.apache.org/ws/addressing"
 	xsi:schemaLocation="
 http://www.springframework.org/schema/beans 
 http://www.springframework.org/schema/beans/spring-beans.xsd
 http://cxf.apache.org/jaxws
 http://cxf.apache.org/schemas/jaxws.xsd">
 
-	<import resource="classpath:META-INF/cxf/cxf.xml" /> 
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" /> 
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<jaxws:endpoint 
-	  id="CalculatorPull" 
-	  implementor="com.nostalgiaguy.soapservice.cxf.CalculatorPullImpl" 
-	  address="/CalculatorPull" />
-	  
+	<jaxws:endpoint id="CalculatorPull"
+		implementor="com.nostalgiaguy.soapservice.cxf.CalculatorPullImpl"
+		address="/CalculatorPull" />
+
+	<jaxws:endpoint id="Test"
+		implementor="com.nostalgiaguy.soapservice.cxf.testing.TestImpl"
+		address="/Test" />
+
+	<jaxws:endpoint id="TestAri"
+		implementor="com.nostalgiaguy.soapservice.cxf.auth.property.TestAriImpl"
+		address="/TestAri">
+
+		<jaxws:features>
+			<wsa:addressing>
+				<wsp:Policy xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy"
+					xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+					<wsam:AnonymousResponses
+						xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" />
+				</wsp:Policy>
+			</wsa:addressing>
+		</jaxws:features>
+
+		<jaxws:inInterceptors>
+			<bean
+				class="com.nostalgiaguy.soapservice.cxf.auth.property.WSSecurityInterceptor">
+				<property name="properties">
+					<map>
+						<entry key="action" value="UsernameToken" />
+						<entry key="passwordType" value="PasswordText" />
+						<entry key="passwordCallbackClass"
+							value="com.nostalgiaguy.soapservice.cxf.auth.property.PullPasswordCallBack" />
+					</map>
+				</property>
+			</bean>
+		</jaxws:inInterceptors>
+	</jaxws:endpoint>
+
 </beans>
