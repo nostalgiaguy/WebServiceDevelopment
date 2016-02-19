@@ -8,19 +8,16 @@ package com.nostalgiaguy.soapservice.cxf.auth.property;
 public class ValidationException extends ServiceException {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * @param msg
 	 * @param cause
 	 */
 	public ValidationException(String msg, Throwable cause) {
 		super(msg, cause);
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param msg
-	 */
-	public ValidationException(String msg) {
-		super(msg);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -37,8 +34,7 @@ public class ValidationException extends ServiceException {
 	 * @param errorCode
 	 * @param shortText
 	 */
-	public ValidationException(String errorType, String errorCode,
-			String shortText) {
+	public ValidationException(String shortText) {
 		super( shortText);
 		// TODO Auto-generated constructor stub
 	}

@@ -8,53 +8,13 @@ package com.nostalgiaguy.soapservice.cxf.auth.property;
 
 public class ServiceException extends Exception {
 	
-	protected String errorType;
-    protected String errorCode;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 856019139063683505L;
+	
     protected String shortText;
     
-    
-	/**
-	 * @return the errorType
-	 */
-	public String getErrorType() {
-		return errorType;
-	}
-
-	/**
-	 * @param errorType the errorType to set
-	 */
-	public void setErrorType(String errorType) {
-		this.errorType = errorType;
-	}
-
-	/**
-	 * @return the errorCode
-	 */
-	public String getErrorCode() {
-		return errorCode;
-	}
-
-	/**
-	 * @param errorCode the errorCode to set
-	 */
-	public void setErrorCode(String errorCode) {
-		this.errorCode = errorCode;
-	}
-
-	/**
-	 * @return the shortText
-	 */
-	public String getShortText() {
-		return shortText;
-	}
-
-	/**
-	 * @param shortText the shortText to set
-	 */
-	public void setShortText(String shortText) {
-		this.shortText = shortText;
-	}
-
 	/**
 	 * @param msg
 	 * @param cause
@@ -67,8 +27,9 @@ public class ServiceException extends Exception {
 	/**
 	 * @param msg
 	 */
-	public ServiceException(String msg) {
-		super(msg);
+	public ServiceException(String shortText) {
+		super(shortText);
+		this.shortText = shortText;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -80,15 +41,18 @@ public class ServiceException extends Exception {
 		// TODO Auto-generated constructor stub
 	}
 	
+
 	/**
-	 * @param errorType
-	 * @param errorCode
-	 * @param shortText
+	 * @return the shortText
 	 */
-	public ServiceException(String errorType, String errorCode, String shortText) {
-		super(shortText);
-		this.errorType = errorType;
-		this.errorCode = errorCode;
+	public String getShortText() {
+		return shortText;
+	}
+
+	/**
+	 * @param shortText the shortText to set
+	 */
+	public void setShortText(String shortText) {
 		this.shortText = shortText;
 	}
 

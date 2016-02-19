@@ -29,18 +29,20 @@ public class TestAriImpl implements TestAri {
 		// TODO Auto-generated method stub
 
 		String userName = ASPThreadLocal.getUserName();
-		LOG.info(userName);
+		LOG.info("Username: "+userName);
 		try {
 			if (userName != null) {
 				return "my name is " + name;
 			}
 			throw new ValidationException(
 					Error.ErrorDescription.WRONG_CREDENTIALS.toString());
-		} catch (Exception e) {
-
-			throw new ValidationException(
-					Error.ErrorDescription.WRONG_CREDENTIALS.toString());
+		}
+		
+		finally{
+			LOG.info("End of service");
 		}
 	}
+		
+	
 
 }
