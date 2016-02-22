@@ -5,12 +5,10 @@ package com.nostalgiaguy.soapservice.cxf.auth.property;
  * 
  */
 
-public class ValidationException extends ServiceException {
+public class ValidationException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	protected String shortText;
 
 	/**
 	 * @param msg
@@ -36,7 +34,21 @@ public class ValidationException extends ServiceException {
 	 */
 	public ValidationException(String shortText) {
 		super( shortText);
-		// TODO Auto-generated constructor stub
+		this.shortText = shortText;
+	}
+	
+	/**
+	 * @return the shortText
+	 */
+	public String getShortText() {
+		return shortText;
+	}
+
+	/**
+	 * @param shortText the shortText to set
+	 */
+	public void setShortText(String shortText) {
+		this.shortText = shortText;
 	}
 
 }

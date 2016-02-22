@@ -1,0 +1,21 @@
+<!-- 
+WSDL_URL:http://localhost:8880/SoapServiceUsingCXF/TestAri.wsdl
+Username:shubham
+password:pathak
+WSS-Password Type:PasswordText
+WS-A:Enable WSA Addressing-Unmark
+
+ -->
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:prop="http://property.auth.cxf.soapservice.nostalgiaguy.com/">
+   <soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <wsse:Security soapenv:mustunderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/>
+      <wsa:Action>http://property.auth.cxf.soapservice.nostalgiaguy.com/TestAri/greet</wsa:Action>
+      <wsa:MessageID>uuid:d8c0f313-9a04-4aaa-b085-82c63dc2523</wsa:MessageID>
+   </soapenv:Header>
+   <soapenv:Body>
+      <prop:greet>
+         <arg0>nostalgiaguy</arg0>
+      </prop:greet>
+   </soapenv:Body>
+</soapenv:Envelope>
