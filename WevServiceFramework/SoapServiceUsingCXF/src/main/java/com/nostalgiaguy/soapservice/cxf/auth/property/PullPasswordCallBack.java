@@ -32,20 +32,37 @@ public class PullPasswordCallBack implements CallbackHandler {
 	public void handle(Callback[] callbacks) throws IOException,
 			UnsupportedCallbackException {
 
-		String user = "shubham";
-		String pwd = "pathak";
-
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 		logger.debug("Identifier from request {}", pc.getIdentifier());
 		if (pc.getIdentifier() != null && !pc.getIdentifier().trim().isEmpty()
-				&& user.equals(pc.getIdentifier())) {
-			pc.setPassword(pwd);
+				&& pc.getIdentifier().equals(getLoginUserName())) {
+			pc.setPassword(getLoginPassWord());
 			ASPThreadLocal.setUserName(pc.getIdentifier());
 		}
 
 		else {
+			ASPThreadLocal.setUserName(pc.getIdentifier());
 			pc.setPassword(pc.getIdentifier());
 		}
-
+	}
+	
+	public String getLoginUserName() {	
+		LoginBean loginBean = (LoginBean)SpringApplicationContext.getBean("_loginBean");		
+		String userName=null;
+		if(loginBean != null){
+			userName=loginBean.getUserName();
+		}	
+		logger.debug("Inside getLoginUserName()");
+		return userName;		
+	}
+	
+	public String getLoginPassWord() {	
+		LoginBean loginBean = (LoginBean)SpringApplicationContext.getBean("_loginBean");		
+		String passWord=null;
+		if(loginBean != null){
+			passWord=loginBean.getPassWord();
+		}	
+		logger.debug("Inside getLoginPassWord()");
+		return passWord;		
 	}
 }
