@@ -1,35 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:util="http://www.springframework.org/schema/util" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-           http://www.springframework.org/schema/aop 
-           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
-           http://www.springframework.org/schema/jee 
-           http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
-           http://www.springframework.org/schema/util 
-           http://www.springframework.org/schema/util/spring-util-3.0.xsd
-           http://www.springframework.org/schema/tx 
-           http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
-		   http://www.springframework.org/schema/context
-		   http://www.springframework.org/schema/context/spring-context-3.1.xsd
-		   http://www.springframework.org/schema/cache
-		   http://www.springframework.org/schema/cache/spring-cache.xsd">
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 	<import resource="classpath:cxf.xml" />
+
+	<jdbc:initialize-database data-source="ds"
+		enabled="true">
+		<jdbc:script location="classpath:db-schema.sql" />
+	</jdbc:initialize-database>
+
+	<bean id="ds"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/shubham" />
+		<property name="username" value="root" />
+		<property name="password" value="1234" />
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="ds"></property>
+	</bean>
+
+	<bean id="ns"
+		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="ds"></constructor-arg>
+	</bean>
+
+	<bean id="edao"
+		class="com.nostalgiaguy.soapservice.cxf.auth.property.LoginBeanDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<constructor-arg>
+			<ref bean="ns" />
+		</constructor-arg>
+	</bean>
+
 
 	<context:component-scan
 		base-package="com.nostalgiaguy.soapservice.cxf.auth.property" />
 
 	<bean id="_loginBean"
 		class="com.nostalgiaguy.soapservice.cxf.auth.property.LoginBean">
-		<constructor-arg name="userName" value="shubham"></constructor-arg>
-		<constructor-arg name="passWord" value="pathak"></constructor-arg>
+		<!-- <constructor-arg name="userName" value="shubham"></constructor-arg> 
+			<constructor-arg name="passWord" value="pathak"></constructor-arg> -->
 	</bean>
 
 </beans>
+
+
+<!-- <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd 
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd 
+	http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc 
+	http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd"> -->
 

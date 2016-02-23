@@ -34,35 +34,36 @@ public class PullPasswordCallBack implements CallbackHandler {
 
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 		logger.debug("Identifier from request {}", pc.getIdentifier());
-		if (pc.getIdentifier() != null && !pc.getIdentifier().trim().isEmpty()
-				&& pc.getIdentifier().equals(getLoginUserName())) {
-			pc.setPassword(getLoginPassWord());
+		if (pc.getIdentifier() != null && !pc.getIdentifier().trim().isEmpty()) {
+			pc.setPassword(getPassword(pc.getIdentifier()));
 			ASPThreadLocal.setUserName(pc.getIdentifier());
 		}
 
-		else {
-			ASPThreadLocal.setUserName(pc.getIdentifier());
-			pc.setPassword(pc.getIdentifier());
+	}
+
+	public String getPassword(String userName) {
+		return getLoginDetails(userName);
+	}
+
+	public String getLoginDetails(String userName) {
+		LoginBeanDao loginBean = (LoginBeanDao) SpringApplicationContext.getBean("edao");
+		String passWord = null;
+		if (loginBean != null) {
+			passWord = loginBean.getLoginPassword(userName);
 		}
+		return passWord;
 	}
-	
-	public String getLoginUserName() {	
-		LoginBean loginBean = (LoginBean)SpringApplicationContext.getBean("_loginBean");		
-		String userName=null;
-		if(loginBean != null){
-			userName=loginBean.getUserName();
-		}	
-		logger.debug("Inside getLoginUserName()");
-		return userName;		
-	}
-	
-	public String getLoginPassWord() {	
-		LoginBean loginBean = (LoginBean)SpringApplicationContext.getBean("_loginBean");		
-		String passWord=null;
-		if(loginBean != null){
-			passWord=loginBean.getPassWord();
-		}	
-		logger.debug("Inside getLoginPassWord()");
-		return passWord;		
-	}
+
 }
+
+/*
+ * public String getLoginUserName() { LoginBean loginBean =
+ * (LoginBean)SpringApplicationContext.getBean("_loginBean"); String
+ * userName=null; if(loginBean != null){ userName=loginBean.getUserName(); }
+ * logger.debug("Inside getLoginUserName()"); return userName; }
+ * 
+ * public String getLoginPassWord() { LoginBean loginBean =
+ * (LoginBean)SpringApplicationContext.getBean("_loginBean"); String
+ * passWord=null; if(loginBean != null){ passWord=loginBean.getPassWord(); }
+ * logger.debug("Inside getLoginPassWord()"); return passWord; }
+ */

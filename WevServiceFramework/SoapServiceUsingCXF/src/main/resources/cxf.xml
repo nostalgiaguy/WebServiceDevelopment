@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
-	xmlns:cxf="http://cxf.apache.org/core" xmlns:wsa="http://cxf.apache.org/ws/addressing"
+	xmlns:cxf="http://cxf.apache.org/core" 
 	xsi:schemaLocation="
 http://www.springframework.org/schema/beans 
 http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -25,7 +25,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 		address="/TestAri">
 
 		<jaxws:features>
-			<wsa:addressing >
+			<wsa:addressing xmlns:wsa="http://cxf.apache.org/ws/addressing">
 				<wsp:Policy xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy"
 					xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
 					<wsam:AnonymousResponses
